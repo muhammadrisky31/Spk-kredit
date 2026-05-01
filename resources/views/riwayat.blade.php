@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Prediksi - SPK Kredit</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background-color: #f0f2f5;
-            color: #1a1a2e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f8;
             min-height: 100vh;
         }
 
-        /* ============ NAVBAR ============ */
+        /* ===================== NAVBAR ===================== */
         .navbar {
             background-color: #ffffff;
-            border-bottom: 1px solid #e8eaed;
+            border-bottom: 1px solid #e5e7eb;
             padding: 0 40px;
             height: 64px;
             display: flex;
@@ -33,12 +28,6 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.06);
         }
 
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -46,180 +35,196 @@
             text-decoration: none;
         }
 
-        .navbar-logo {
+        .brand-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #3b5bdb, #4c6ef5);
+            background: linear-gradient(135deg, #3b5bdb, #4dabf7);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .navbar-logo svg {
+        .brand-icon svg {
             width: 22px;
             height: 22px;
             color: #fff;
         }
 
-        .navbar-brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .navbar-brand-title {
+        .brand-text .brand-title {
             font-size: 15px;
             font-weight: 700;
             color: #1a1a2e;
+            line-height: 1.2;
         }
 
-        .navbar-brand-sub {
+        .brand-text .brand-subtitle {
             font-size: 11px;
             color: #6b7280;
+            line-height: 1.2;
         }
 
-        .navbar-nav {
+        .navbar-menu {
             display: flex;
             align-items: center;
             gap: 4px;
             list-style: none;
         }
 
-        .navbar-nav a {
+        .navbar-menu a {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
             padding: 8px 16px;
             border-radius: 8px;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            color: #6b7280;
+            color: #4b5563;
             transition: all 0.2s;
         }
 
-        .navbar-nav a:hover {
+        .navbar-menu a:hover {
             background-color: #f3f4f6;
             color: #1a1a2e;
         }
 
-        .navbar-nav a.active {
-            background-color: #eef2ff;
-            color: #4c6ef5;
+        .navbar-menu a.active {
+            background-color: #eff2ff;
+            color: #3b5bdb;
             font-weight: 600;
         }
 
-        .navbar-nav a svg {
+        .navbar-menu a svg {
             width: 16px;
             height: 16px;
+            flex-shrink: 0;
         }
 
         .navbar-right {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
-        .notif-btn {
-            position: relative;
+        .btn-notif {
             width: 38px;
             height: 38px;
-            background: #f3f4f6;
-            border: none;
             border-radius: 50%;
+            border: none;
+            background-color: #f3f4f6;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            color: #4b5563;
             transition: background 0.2s;
+            position: relative;
         }
 
-        .notif-btn:hover {
-            background: #e5e7eb;
-        }
+        .btn-notif:hover { background-color: #e5e7eb; }
+        .btn-notif svg { width: 18px; height: 18px; }
 
-        .notif-btn svg {
-            width: 18px;
-            height: 18px;
-            color: #6b7280;
-        }
-
-        .notif-badge {
+        .notif-dot {
             position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 8px;
-            height: 8px;
+            top: 7px;
+            right: 8px;
+            width: 7px;
+            height: 7px;
             background: #ef4444;
             border-radius: 50%;
-            border: 1.5px solid #fff;
+            border: 2px solid #fff;
         }
 
-        .user-menu {
+        .user-btn {
             display: flex;
             align-items: center;
             gap: 8px;
+            background: none;
+            border: none;
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 8px;
             transition: background 0.2s;
+            position: relative;
         }
 
-        .user-menu:hover {
-            background: #f3f4f6;
-        }
+        .user-btn:hover { background-color: #f3f4f6; }
 
         .user-avatar {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #4c6ef5, #748ffc);
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #7950f2, #9c82f5);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
+            font-size: 13px;
             font-weight: 700;
-            font-size: 14px;
         }
 
         .user-name {
             font-size: 14px;
             font-weight: 500;
-            color: #1a1a2e;
+            color: #374151;
         }
 
-        .user-menu svg {
-            width: 14px;
-            height: 14px;
-            color: #9ca3af;
+        .user-btn svg { width: 14px; height: 14px; color: #9ca3af; }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            min-width: 160px;
+            z-index: 200;
+            overflow: hidden;
         }
 
-        /* ============ MAIN CONTENT ============ */
+        .dropdown-menu a,
+        .dropdown-menu button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px 16px;
+            font-size: 13.5px;
+            color: #374151;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.15s;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu button:hover { background: #f9fafb; }
+
+        .dropdown-menu .logout-btn { color: #ef4444; }
+        .dropdown-menu svg { width: 15px; height: 15px; }
+
+        .user-btn.open .dropdown-menu { display: block; }
+
+        /* ===================== MAIN CONTENT ===================== */
         .main-content {
-            max-width: 1100px;
+            padding: 36px 48px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 36px 24px;
         }
 
-        /* ============ PAGE HEADER ============ */
-        .page-header {
-            margin-bottom: 28px;
-        }
+        /* Page Header */
+        .page-header { margin-bottom: 24px; }
+        .page-title { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+        .page-subtitle { font-size: 13px; color: #6b7280; margin-top: 4px; }
 
-        .page-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 6px;
-        }
-
-        .page-subtitle {
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        /* ============ STAT CARDS ============ */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -230,12 +235,11 @@
         .stat-card {
             background: #ffffff;
             border-radius: 14px;
-            padding: 22px 24px;
+            padding: 20px 24px;
             display: flex;
             align-items: center;
             gap: 16px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-            border: 1px solid #f0f0f0;
+            border: 1px solid #e9ecef;
         }
 
         .stat-icon {
@@ -248,762 +252,534 @@
             flex-shrink: 0;
         }
 
-        .stat-icon.blue {
-            background-color: #eef2ff;
-        }
+        .stat-icon.blue  { background: #eff2ff; }
+        .stat-icon.red   { background: #fff0f0; }
+        .stat-icon.green { background: #f0fdf4; }
+        .stat-icon svg   { width: 20px; height: 20px; }
 
-        .stat-icon.red {
-            background-color: #fff1f2;
-        }
+        .icon-blue  { color: #3b5bdb; }
+        .icon-red   { color: #ef4444; }
+        .icon-green { color: #22c55e; }
 
-        .stat-icon.green {
-            background-color: #f0fdf4;
-        }
+        .stat-number { font-size: 26px; font-weight: 800; color: #1a1a2e; line-height: 1; }
+        .stat-label  { font-size: 12px; color: #9ca3af; margin-top: 4px; }
 
-        .stat-icon svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .stat-icon.blue svg { color: #4c6ef5; }
-        .stat-icon.red svg  { color: #ef4444; }
-        .stat-icon.green svg { color: #22c55e; }
-
-        .stat-info {}
-
-        .stat-number {
-            font-size: 26px;
-            font-weight: 700;
-            color: #1a1a2e;
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #9ca3af;
-        }
-
-        /* ============ SEARCH & FILTER ============ */
-        .search-filter-card {
+        /* Table Card */
+        .table-card {
             background: #ffffff;
-            border-radius: 14px;
-            padding: 20px 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-            border: 1px solid #f0f0f0;
+            border-radius: 16px;
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+        }
+
+        /* Toolbar */
+        .table-toolbar {
+            padding: 18px 24px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
+            border-bottom: 1px solid #f3f4f6;
             flex-wrap: wrap;
         }
 
         .search-wrapper {
             flex: 1;
-            min-width: 220px;
             position: relative;
+            min-width: 220px;
         }
 
         .search-wrapper svg {
             position: absolute;
-            left: 14px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             color: #9ca3af;
             pointer-events: none;
         }
 
         .search-input {
             width: 100%;
-            padding: 10px 14px 10px 40px;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 9px 14px 9px 36px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 9px;
+            font-size: 13.5px;
             color: #374151;
-            background: #f9fafb;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s;
+            background: #f9fafb;
         }
 
-        .search-input::placeholder {
-            color: #b0b7c3;
-        }
+        .search-input:focus { border-color: #3b5bdb; background: #fff; }
+        .search-input::placeholder { color: #b0b7c3; }
 
-        .search-input:focus {
-            border-color: #4c6ef5;
-            box-shadow: 0 0 0 3px rgba(76,110,245,0.1);
-            background: #fff;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 8px;
-            flex-shrink: 0;
-        }
+        .filter-btns { display: flex; gap: 6px; }
 
         .filter-btn {
-            padding: 9px 20px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 500;
-            cursor: pointer;
             border: 1.5px solid #e5e7eb;
-            background: #ffffff;
+            background: #fff;
             color: #6b7280;
-            transition: all 0.2s;
-            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.15s;
         }
 
-        .filter-btn:hover {
-            border-color: #4c6ef5;
-            color: #4c6ef5;
-        }
+        .filter-btn:hover { border-color: #3b5bdb; color: #3b5bdb; }
+        .filter-btn.active { background: #3b5bdb; color: #fff; border-color: #3b5bdb; }
 
-        .filter-btn.active {
-            background: #1a1a2e;
-            color: #ffffff;
-            border-color: #1a1a2e;
-        }
-
-        /* ============ TABLE ============ */
-        .table-card {
-            background: #ffffff;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-            border: 1px solid #f0f0f0;
-        }
-
-        .data-table {
+        /* Table */
+        table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 13.5px;
         }
 
-        .data-table thead tr {
-            border-bottom: 1px solid #f0f2f5;
-        }
-
-        .data-table thead th {
-            padding: 14px 20px;
+        thead th {
+            padding: 12px 20px;
             text-align: left;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             color: #9ca3af;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            background: #ffffff;
+            background: #fafafa;
+            border-bottom: 1px solid #f3f4f6;
         }
 
-        .data-table tbody tr {
-            border-bottom: 1px solid #f8f9fa;
+        tbody tr {
+            border-bottom: 1px solid #f9fafb;
             transition: background 0.15s;
         }
 
-        .data-table tbody tr:last-child {
-            border-bottom: none;
-        }
+        tbody tr:hover { background: #fafbff; }
+        tbody tr:last-child { border-bottom: none; }
 
-        .data-table tbody tr:hover {
-            background-color: #fafbff;
-        }
+        tbody td { padding: 16px 20px; vertical-align: middle; }
 
-        .data-table tbody td {
-            padding: 18px 20px;
-            font-size: 14px;
-            vertical-align: middle;
-        }
+        .nama      { font-weight: 600; color: #1a1a2e; font-size: 14px; }
+        .tanggal   { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+        .umur      { font-weight: 600; color: #1a1a2e; }
+        .pendapatan { font-size: 12px; color: #6b7280; margin-top: 2px; }
 
-        /* Name + Date */
-        .td-name {
-            font-weight: 600;
-            color: #1a1a2e;
-            font-size: 14px;
-        }
-
-        .td-date {
-            font-size: 12px;
-            color: #9ca3af;
-            margin-top: 3px;
-        }
-
-        /* Age + Income */
-        .td-age {
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .td-income {
-            font-size: 12px;
-            color: #9ca3af;
-            margin-top: 3px;
-        }
-
-        /* Status Badge */
+        /* Badges */
         .badge {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 600;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
         }
 
-        .badge-owner {
-            background: #f1f5f9;
-            color: #475569;
+        .badge-pemilik { background: #eff2ff; color: #3b5bdb; }
+        .badge-rental  { background: #fff7ed; color: #ea580c; }
+        .badge-cicilan { background: #fdf4ff; color: #9333ea; }
+        .badge-default { background: #f3f4f6; color: #6b7280; }
+
+        /* Hasil */
+        .hasil-wrap { display: flex; align-items: center; gap: 7px; }
+
+        .hasil-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
-        .badge-rent {
-            background: #f0f9ff;
-            color: #0369a1;
-        }
+        .dot-rendah { background: #22c55e; }
+        .dot-tinggi { background: #ef4444; }
 
-        .badge-cicilan {
-            background: #fef3c7;
-            color: #92400e;
-        }
+        .label-rendah { font-weight: 600; color: #15803d; font-size: 13.5px; }
+        .label-tinggi { font-weight: 600; color: #dc2626; font-size: 13.5px; }
 
-        /* Tujuan */
-        .td-tujuan {
-            font-size: 13px;
-            color: #374151;
-            font-weight: 500;
-        }
+        /* Aksi */
+        .aksi-btns { display: flex; gap: 8px; }
 
-        /* Hasil Prediksi */
-        .prediksi-wrapper {}
-
-        .prediksi-label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .prediksi-label.rendah {
-            color: #16a34a;
-        }
-
-        .prediksi-label.tinggi {
-            color: #ef4444;
-        }
-
-        .prediksi-label svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .prediksi-conf {
-            font-size: 11px;
-            color: #9ca3af;
-            margin-top: 3px;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .action-btn {
-            width: 34px;
-            height: 34px;
+        .btn-icon {
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.15s;
             text-decoration: none;
         }
 
-        .action-btn.view {
-            background: #eef2ff;
-            color: #4c6ef5;
-        }
+        .btn-view   { background: #eff2ff; color: #3b5bdb; }
+        .btn-view:hover  { background: #dbe4ff; }
+        .btn-edit   { background: #fff7ed; color: #ea580c; }
+        .btn-edit:hover  { background: #ffedd5; }
+        .btn-delete { background: #fff0f0; color: #ef4444; }
+        .btn-delete:hover { background: #fee2e2; }
+        .btn-icon svg { width: 15px; height: 15px; }
 
-        .action-btn.view:hover {
-            background: #4c6ef5;
-            color: #ffffff;
-        }
-
-        .action-btn.delete {
-            background: #fff1f2;
-            color: #ef4444;
-        }
-
-        .action-btn.delete:hover {
-            background: #ef4444;
-            color: #ffffff;
-        }
-
-        .action-btn svg {
-            width: 15px;
-            height: 15px;
-        }
-
-        /* Empty State */
+        /* Empty state */
         .empty-state {
-            padding: 60px 20px;
             text-align: center;
+            padding: 60px 20px;
             color: #9ca3af;
+            font-size: 14px;
         }
 
-        .empty-state svg {
+        .empty-icon {
             width: 48px;
             height: 48px;
-            margin-bottom: 12px;
+            margin: 0 auto 12px;
             color: #d1d5db;
         }
 
-        .empty-state p {
-            font-size: 15px;
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content { padding: 24px 24px; }
         }
 
         @media (max-width: 768px) {
-            .navbar { padding: 0 16px; }
-            .navbar-nav { display: none; }
-            .stats-grid { grid-template-columns: 1fr; }
+            .navbar { padding: 0 18px; }
+            .navbar-menu { display: none; }
             .main-content { padding: 20px 16px; }
-            .search-filter-card { flex-direction: column; }
-            .search-wrapper { width: 100%; }
+            .stats-grid { grid-template-columns: 1fr; }
+            thead th:nth-child(3),
+            tbody td:nth-child(3) { display: none; }
         }
     </style>
 </head>
 <body>
 
-    {{-- ============ NAVBAR ============ --}}
+    <!-- ==================== NAVBAR ==================== -->
     <nav class="navbar">
-        <div class="navbar-left">
-            {{-- Brand --}}
-            <a href="{{ url('/') }}" class="navbar-brand">
-                <div class="navbar-logo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 20V10M12 20V4M6 20v-6"/>
+
+        <!-- Brand -->
+        <a href="{{ url('/dashboard') }}" class="navbar-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"/>
+                    <line x1="12" y1="20" x2="12" y2="4"/>
+                    <line x1="6"  y1="20" x2="6"  y2="14"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <div class="brand-title">SPK Kredit</div>
+                <div class="brand-subtitle">Decision Tree</div>
+            </div>
+        </a>
+
+        <!-- Menu -->
+        <ul class="navbar-menu">
+            <li>
+                <a href="{{ url('/dashboard') }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
                     </svg>
-                </div>
-                <div class="navbar-brand-text">
-                    <span class="navbar-brand-title">SPK Kredit</span>
-                    <span class="navbar-brand-sub"></span>
-                </div>
-            </a>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/prediksi') }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    Prediksi
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/riwayat') }}" class="active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    Riwayat
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/tentang') }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    Tentang
+                </a>
+            </li>
+        </ul>
 
-            {{-- Nav Links --}}
-            <ul class="navbar-nav">
-                <li>
-                    <a href="{{ url('/dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-                        </svg>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/prediksi') }}" class="{{ request()->is('prediksi') ? 'active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                        </svg>
-                        Prediksi
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/riwayat') }}" class="{{ request()->is('riwayat') ? 'active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="12 8 12 12 14 14"/>
-                            <path d="M3.05 11a9 9 0 1 0 .5-4.5"/>
-                            <polyline points="3 3 3 9 9 9"/>
-                        </svg>
-                        Riwayat
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/tentang') }}" class="{{ request()->is('tentang') ? 'active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
-                        </svg>
-                        Tentang
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        {{-- Right Section --}}
+        <!-- Right -->
         <div class="navbar-right">
-            <button class="notif-btn" title="Notifikasi">
+            <button class="btn-notif" title="Notifikasi">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
                     <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                 </svg>
-                <span class="notif-badge"></span>
+                <span class="notif-dot"></span>
             </button>
 
-            <div class="user-menu">
-                <div class="user-avatar">
-                    {{ strtoupper(substr(Auth::user()->name ?? 'P', 0, 1)) }}
+            <div style="position:relative;">
+                <button class="user-btn" id="userBtn" onclick="toggleDropdown()">
+                    <div class="user-avatar">
+                        {{ strtoupper(substr(session('user_name', 'P'), 0, 1)) }}
+                    </div>
+                    <span class="user-name">{{ session('user_name', 'Pengguna') }}</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="{{ url('/dashboard') }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Profil Saya
+                    </a>
+                    <a href="{{ url('/logout') }}" class="logout-btn"
+                       onclick="return confirm('Yakin ingin logout?')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Logout
+                    </a>
                 </div>
-                <span class="user-name">{{ Auth::user()->name ?? 'Pengguna' }}</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"/>
-                </svg>
             </div>
         </div>
+
     </nav>
 
-    {{-- ============ MAIN CONTENT ============ --}}
-    <main class="main-content">
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="main-content">
 
-        {{-- Page Header --}}
+        <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-title">Riwayat Prediksi</h1>
             <p class="page-subtitle">Semua hasil prediksi risiko kredit yang telah dilakukan.</p>
         </div>
 
-        {{-- Stat Cards --}}
+        <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon blue">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="12 8 12 12 14 14"/>
-                        <path d="M3.05 11a9 9 0 1 0 .5-4.5"/>
-                        <polyline points="3 3 3 9 9 9"/>
+                    <svg class="icon-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
                     </svg>
                 </div>
-                <div class="stat-info">
-                    <div class="stat-number">{{ $totalPrediksi ?? 3 }}</div>
+                <div>
+                    <div class="stat-number">{{ $totalPrediksi }}</div>
                     <div class="stat-label">Total Prediksi</div>
                 </div>
             </div>
 
             <div class="stat-card">
                 <div class="stat-icon red">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="12 8 12 12 14 14"/>
-                        <path d="M3.05 11a9 9 0 1 0 .5-4.5"/>
-                        <polyline points="3 3 3 9 9 9"/>
+                    <svg class="icon-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
                     </svg>
                 </div>
-                <div class="stat-info">
-                    <div class="stat-number">{{ $risikoTinggi ?? 1 }}</div>
+                <div>
+                    <div class="stat-number">{{ $risikoTinggi }}</div>
                     <div class="stat-label">Risiko Tinggi</div>
                 </div>
             </div>
 
             <div class="stat-card">
                 <div class="stat-icon green">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="12 8 12 12 14 14"/>
-                        <path d="M3.05 11a9 9 0 1 0 .5-4.5"/>
-                        <polyline points="3 3 3 9 9 9"/>
+                    <svg class="icon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
                     </svg>
                 </div>
-                <div class="stat-info">
-                    <div class="stat-number">{{ $risikoRendah ?? 2 }}</div>
+                <div>
+                    <div class="stat-number">{{ $risikoRendah }}</div>
                     <div class="stat-label">Risiko Rendah</div>
                 </div>
             </div>
         </div>
 
-        {{-- Search & Filter --}}
-        <div class="search-filter-card">
-            <div class="search-wrapper">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input
-                    type="text"
-                    class="search-input"
-                    id="searchInput"
-                    placeholder="Cari nama, tujuan, atau status rumah..."
-                    value="{{ request('search') }}"
-                    oninput="filterTable()"
-                />
-            </div>
-
-            <div class="filter-buttons">
-                <button
-                    class="filter-btn {{ !request('filter') || request('filter') === 'semua' ? 'active' : '' }}"
-                    onclick="setFilter('semua', this)"
-                >Semua</button>
-                <button
-                    class="filter-btn {{ request('filter') === 'rendah' ? 'active' : '' }}"
-                    onclick="setFilter('rendah', this)"
-                >Risiko Rendah</button>
-                <button
-                    class="filter-btn {{ request('filter') === 'tinggi' ? 'active' : '' }}"
-                    onclick="setFilter('tinggi', this)"
-                >Risiko Tinggi</button>
-            </div>
-        </div>
-
-        {{-- Data Table --}}
+        <!-- Table Card -->
         <div class="table-card">
-            <table class="data-table" id="riwayatTable">
+
+            <!-- Toolbar -->
+            <div class="table-toolbar">
+                <form method="GET" action="{{ url('/riwayat') }}" style="display:contents;">
+                    <div class="search-wrapper">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input
+                            type="text"
+                            name="search"
+                            class="search-input"
+                            placeholder="Cari nama, tujuan, atau status rumah..."
+                            value="{{ request('search') }}"
+                            oninput="this.form.submit()"
+                        >
+                    </div>
+                </form>
+
+                <div class="filter-btns">
+                    <button class="filter-btn active" onclick="filterTable('semua', this)">Semua</button>
+                    <button class="filter-btn" onclick="filterTable('rendah', this)">Risiko Rendah</button>
+                    <button class="filter-btn" onclick="filterTable('tinggi', this)">Risiko Tinggi</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table>
                 <thead>
                     <tr>
-                        <th>NAMA / TANGGAL</th>
-                        <th>UMUR / PENDAPATAN</th>
-                        <th>STATUS RUMAH</th>
-                        <th>TUJUAN PINJAMAN</th>
-                        <th>HASIL PREDIKSI</th>
-                        <th style="text-align:right;">AKSI</th>
+                        <th>Nama / Tanggal</th>
+                        <th>Umur / Pendapatan</th>
+                        <th>Status Rumah</th>
+                        <th>Tujuan Pinjaman</th>
+                        <th>Hasil Prediksi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    @forelse($riwayat ?? [] as $item)
-                        @php
-                            $isRendah = strtolower($item->hasil_prediksi ?? '') === 'risiko rendah';
-                            $conf     = $item->confidence ?? 0;
-                        @endphp
-                        <tr data-filter="{{ $isRendah ? 'rendah' : 'tinggi' }}">
-                            {{-- Nama / Tanggal --}}
-                            <td>
-                                <div class="td-name">{{ $item->nama ?? '-' }}</div>
-                                <div class="td-date">{{ \Carbon\Carbon::parse($item->created_at ?? now())->format('Y-m-d') }}</div>
-                            </td>
 
-                            {{-- Umur / Pendapatan --}}
-                            <td>
-                                <div class="td-age">{{ $item->umur ?? '-' }} thn</div>
-                                <div class="td-income">Rp{{ number_format($item->pendapatan ?? 0, 0, ',', '.') }}</div>
-                            </td>
+                @forelse($data as $d)
+                    @php
+                        $isRendah = strtolower($d->hasil ?? '') === 'risiko rendah';
 
-                            {{-- Status Rumah --}}
-                            <td>
-                                @php
-                                    $status = strtoupper($item->status_rumah ?? '');
-                                    $badgeClass = match(true) {
-                                        str_contains($status, 'PEMILIK')  => 'badge-owner',
-                                        str_contains($status, 'RENTAL') || str_contains($status, 'KONTRAK') => 'badge-rent',
-                                        str_contains($status, 'CICILAN') => 'badge-cicilan',
-                                        default => 'badge-owner',
-                                    };
-                                @endphp
-                                <span class="badge {{ $badgeClass }}">{{ $status }}</span>
-                            </td>
+                        $badgeClass = match(strtolower($d->status_rumah ?? '')) {
+                            'pemilik'        => 'badge-pemilik',
+                            'rental/kontrak' => 'badge-rental',
+                            'dalam cicilan'  => 'badge-cicilan',
+                            default          => 'badge-default',
+                        };
 
-                            {{-- Tujuan Pinjaman --}}
-                            <td>
-                                <div class="td-tujuan">{{ strtoupper($item->tujuan_pinjaman ?? '-') }}</div>
-                            </td>
+                        $isAdmin = \App\Models\User::find(session('user_id'))?->role === 'admin';
+                    @endphp
 
-                            {{-- Hasil Prediksi --}}
-                            <td>
-                                <div class="prediksi-wrapper">
-                                    @if($isRendah)
-                                        <div class="prediksi-label rendah">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                                <polyline points="22 4 12 14.01 9 11.01"/>
-                                            </svg>
-                                            Risiko Rendah
-                                        </div>
-                                    @else
-                                        <div class="prediksi-label tinggi">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                                                <line x1="12" y1="9" x2="12" y2="13"/>
-                                                <line x1="12" y1="17" x2="12.01" y2="17"/>
-                                            </svg>
-                                            Risiko Tinggi
-                                        </div>
-                                    @endif
-                                    <div class="prediksi-conf">{{ number_format($conf, 1) }}% conf.</div>
-                                </div>
-                            </td>
+                    <tr data-hasil="{{ $isRendah ? 'rendah' : 'tinggi' }}">
 
-                            {{-- Aksi --}}
-                            <td>
-                                <div class="action-buttons" style="justify-content:flex-end;">
-                                    <a href="{{ url('/riwayat/'.$item->id) }}" class="action-btn view" title="Lihat Detail">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                            <circle cx="12" cy="12" r="3"/>
+                        <td>
+                            <div class="nama">{{ $d->nama }}</div>
+                            <div class="tanggal">
+                                {{ \Carbon\Carbon::parse($d->created_at)->format('Y-m-d') }}
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="umur">{{ $d->umur }} thn</div>
+                            <div class="pendapatan">Rp{{ number_format($d->pendapatan, 0, ',', '.') }}</div>
+                        </td>
+
+                        <td>
+                            <span class="badge {{ $badgeClass }}">
+                                {{ strtoupper($d->status_rumah) }}
+                            </span>
+                        </td>
+
+                        <td style="color:#374151; font-size:13px; text-transform:uppercase;">
+                            {{ $d->tujuan }}
+                        </td>
+
+                        <td>
+                            <div class="hasil-wrap">
+                                <div class="hasil-dot {{ $isRendah ? 'dot-rendah' : 'dot-tinggi' }}"></div>
+                                <span class="{{ $isRendah ? 'label-rendah' : 'label-tinggi' }}">
+                                    {{ $isRendah ? 'Risiko Rendah' : 'Risiko Tinggi' }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="aksi-btns">
+                                <!-- Lihat -->
+                                <button class="btn-icon btn-view" title="Lihat Detail">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                </button>
+
+                                @if($isAdmin)
+                                    <!-- Edit -->
+                                    <a href="/kredit/edit/{{ $d->id }}" class="btn-icon btn-edit" title="Edit">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                         </svg>
                                     </a>
-                                    <form action="{{ url('/riwayat/'.$item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data ini?')">
+
+                                    <!-- Hapus -->
+                                    <form action="/kredit/delete/{{ $d->id }}" method="POST" style="display:inline;">
                                         @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="action-btn delete" title="Hapus">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <button
+                                            type="submit"
+                                            class="btn-icon btn-delete"
+                                            title="Hapus"
+                                            onclick="return confirm('Hapus data ini?')"
+                                        >
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                                 <polyline points="3 6 5 6 21 6"/>
-                                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                                                <path d="M19 6l-1 14H6L5 6"/>
                                                 <path d="M10 11v6M14 11v6"/>
-                                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                                                <path d="M9 6V4h6v2"/>
                                             </svg>
                                         </button>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
+                                @endif
+                            </div>
+                        </td>
 
-                    @empty
-                        {{-- Demo Rows (hapus ini jika sudah ada data dari database) --}}
-                        <tr data-filter="rendah">
-                            <td>
-                                <div class="td-name">Budi Santoso</div>
-                                <div class="td-date">2026-04-01</div>
-                            </td>
-                            <td>
-                                <div class="td-age">35 thn</div>
-                                <div class="td-income">Rp15.000.000</div>
-                            </td>
-                            <td><span class="badge badge-owner">PEMILIK</span></td>
-                            <td><div class="td-tujuan">PERSONAL</div></td>
-                            <td>
-                                <div class="prediksi-wrapper">
-                                    <div class="prediksi-label rendah">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        Risiko Rendah
-                                    </div>
-                                    <div class="prediksi-conf">87.5% conf.</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons" style="justify-content:flex-end;">
-                                    <a href="#" class="action-btn view" title="Lihat Detail">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                                        </svg>
-                                    </a>
-                                    <button class="action-btn delete" title="Hapus">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"/>
-                                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                                            <path d="M10 11v6M14 11v6"/>
-                                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                    </tr>
 
-                        <tr data-filter="tinggi">
-                            <td>
-                                <div class="td-name">Siti Rahayu</div>
-                                <div class="td-date">2026-04-02</div>
-                            </td>
-                            <td>
-                                <div class="td-age">23 thn</div>
-                                <div class="td-income">Rp4.000.000</div>
-                            </td>
-                            <td><span class="badge badge-rent">RENTAL/KONTRAK</span></td>
-                            <td><div class="td-tujuan">PERUSAHAAN BERSAMA</div></td>
-                            <td>
-                                <div class="prediksi-wrapper">
-                                    <div class="prediksi-label tinggi">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                                            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-                                        </svg>
-                                        Risiko Tinggi
-                                    </div>
-                                    <div class="prediksi-conf">91.2% conf.</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons" style="justify-content:flex-end;">
-                                    <a href="#" class="action-btn view" title="Lihat Detail">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                                        </svg>
-                                    </a>
-                                    <button class="action-btn delete" title="Hapus">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"/>
-                                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                                            <path d="M10 11v6M14 11v6"/>
-                                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                @empty
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                <p>Belum ada data prediksi.</p>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
 
-                        <tr data-filter="rendah">
-                            <td>
-                                <div class="td-name">Ahmad Fauzi</div>
-                                <div class="td-date">2026-04-03</div>
-                            </td>
-                            <td>
-                                <div class="td-age">40 thn</div>
-                                <div class="td-income">Rp10.000.000</div>
-                            </td>
-                            <td><span class="badge badge-cicilan">DALAM CICILAN</span></td>
-                            <td><div class="td-tujuan">PERBAIKAN RUMAH/<br>RENOVASI</div></td>
-                            <td>
-                                <div class="prediksi-wrapper">
-                                    <div class="prediksi-label rendah">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        Risiko Rendah
-                                    </div>
-                                    <div class="prediksi-conf">78.3% conf.</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons" style="justify-content:flex-end;">
-                                    <a href="#" class="action-btn view" title="Lihat Detail">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                                        </svg>
-                                    </a>
-                                    <button class="action-btn delete" title="Hapus">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"/>
-                                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                                            <path d="M10 11v6M14 11v6"/>
-                                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
                 </tbody>
             </table>
+
         </div>
+    </div>
 
-    </main>
-
-    {{-- ============ JAVASCRIPT ============ --}}
     <script>
-        let activeFilter = '{{ request("filter") ?: "semua" }}';
-
-        function setFilter(filter, btn) {
-            activeFilter = filter;
+        function filterTable(type, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            applyFilter();
-        }
 
-        function filterTable() {
-            applyFilter();
-        }
-
-        function applyFilter() {
-            const keyword = document.getElementById('searchInput').value.toLowerCase();
-            const rows    = document.querySelectorAll('#tableBody tr');
-
-            rows.forEach(row => {
-                const text        = row.innerText.toLowerCase();
-                const rowFilter   = row.getAttribute('data-filter');
-
-                const matchSearch = keyword === '' || text.includes(keyword);
-                const matchFilter = activeFilter === 'semua' || rowFilter === activeFilter;
-
-                row.style.display = matchSearch && matchFilter ? '' : 'none';
+            document.querySelectorAll('#tableBody tr[data-hasil]').forEach(row => {
+                row.style.display = (type === 'semua' || row.dataset.hasil === type) ? '' : 'none';
             });
         }
+
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        document.addEventListener('click', function(e) {
+            const btn = document.getElementById('userBtn');
+            const menu = document.getElementById('dropdownMenu');
+            if (!btn.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
     </script>
 
 </body>

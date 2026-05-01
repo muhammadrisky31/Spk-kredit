@@ -1,7 +1,7 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 /*
@@ -10,61 +10,59 @@ use App\Models\User;
 |--------------------------------------------------------------------------
 */
 
+// ================= LANDING =================
 Route::get('/', function () {
     return view('landing');
 });
 
+// ================= HALAMAN UTAMA =================
+Route::get('/dashboard', function () {
+    if (!Auth::check()) {
+        return redirect('/login');
+    }
+    return view('dashboard');
+})->name('dashboard');
 
 Route::get('/prediksi', function () {
+    if (!Auth::check()) {
+        return redirect('/login');
+    }
     return view('predict');
 })->name('prediksi');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-// ================= REGISTER =================
+Route::get('/riwayat', function (Request $request) {
+    $data = collect([]); // sementara kosong
+    $totalPrediksi = 0;
+    $risikoTinggi  = 0;
+    $risikoRendah  = 0;
 
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
-
-Route::post('/register', function (Request $request) {
-
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
-
-    return redirect('/users');
-});
-
-Route::get('/riwayat', function () {
-    return view('riwayat');
-})->name('riwayat');
+    return view('riwayat', compact('data','totalPrediksi','risikoTinggi','risikoRendah'));
+})->middleware('auth')->name('riwayat');
 
 Route::get('/tentang', function () {
     return view('tentang');
 })->name('tentang');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// ================= REGISTER =================
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
 
-// ================= LOGIN TANPA AUTH =================
+Route::post('/register', function (Request $request) {
+    User::create([
+        'name'     => $request->name,
+        'email'    => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+    return redirect('/login');
+});
 
-// FORM LOGIN
+// ================= LOGIN =================
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-// PROSES LOGIN
 Route::post('/login', function (Request $request) {
-
     $user = User::where('email', $request->email)->first();
 
     if (!$user) {
@@ -75,31 +73,24 @@ Route::post('/login', function (Request $request) {
         return back()->with('error', 'Password salah');
     }
 
-    // SIMPAN SESSION
-    session([
-        'user_id' => $user->id,
-        'user_name' => $user->name
-    ]);
+    Auth::login($user);
+    $request->session()->regenerate();
 
-    return redirect('/users');
+    return redirect('/dashboard');
 });
 
-// LOGOUT
+// ================= LOGOUT =================
 Route::get('/logout', function () {
+    Auth::logout();
     session()->flush();
     return redirect('/login');
 });
 
-
-// ================= TAMPIL DATA =================
-
+// ================= USERS =================
 Route::get('/users', function () {
-
-    // PROTEKSI LOGIN
-    if (!session('user_id')) {
+    if (!Auth::check()) {
         return redirect('/login');
     }
-
     $users = User::all();
     return view('users', compact('users'));
 });
