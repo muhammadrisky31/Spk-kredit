@@ -1,19 +1,16 @@
 @extends('layouts.navbar')
 
-
 @php $pageTitle = 'Dashboard'; @endphp
 
 @section('content')
   
   <style>
-        /* ===================== MAIN CONTENT ===================== */
         .main-content {
             padding: 40px 60px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* ===================== CARD ===================== */
         .predict-card {
             background: #ffffff;
             border-radius: 16px;
@@ -41,7 +38,6 @@
             padding: 36px 40px 40px;
         }
 
-        /* ===================== FORM GRID ===================== */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -52,6 +48,10 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
         }
 
         .form-label {
@@ -85,6 +85,18 @@
             box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.12);
         }
 
+        .form-input[readonly] {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .form-hint {
+            font-size: 11.5px;
+            color: #6b7280;
+            margin-top: -4px;
+        }
+
         .select-wrapper {
             position: relative;
         }
@@ -113,7 +125,6 @@
             height: 16px;
         }
 
-        /* ===================== BUTTON ===================== */
         .btn-row {
             margin-top: 32px;
             display: flex;
@@ -151,7 +162,6 @@
             height: 17px;
         }
 
-        /* ===================== RESULT AREA ===================== */
         .result-area {
             margin-top: 24px;
             padding: 20px 24px;
@@ -174,7 +184,6 @@
             border: 1.5px solid #fca5a5;
         }
 
-        /* ===================== ALERT / VALIDATION ===================== */
         .alert {
             padding: 12px 16px;
             border-radius: 8px;
@@ -194,65 +203,40 @@
             border: 1px solid #6ee7b7;
         }
 
-        /* ===================== RESPONSIVE ===================== */
-        @media (max-width: 1024px) {
-            .main-content {
-                padding: 30px 30px;
-            }
+        .divider {
+            grid-column: 1 / -1;
+            border: none;
+            border-top: 1.5px dashed #e5e7eb;
+            margin: 4px 0;
+        }
 
-            .form-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 1024px) {
+            .main-content { padding: 30px 30px; }
+            .form-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 0 18px;
-            }
-
-            .navbar-menu {
-                display: none;
-            }
-
-            .main-content {
-                padding: 20px 16px;
-            }
-
-            .card-header {
-                padding: 24px 20px 20px;
-            }
-
-            .card-body {
-                padding: 20px 20px 28px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-title {
-                font-size: 17px;
-            }
+            .navbar { padding: 0 18px; }
+            .navbar-menu { display: none; }
+            .main-content { padding: 20px 16px; }
+            .card-header { padding: 24px 20px 20px; }
+            .card-body { padding: 20px 20px 28px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .card-title { font-size: 17px; }
         }
     </style>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
     <main class="main-content">
-
-        <!-- Predict Card -->
         <div class="predict-card">
 
-            <!-- Header -->
             <div class="card-header">
                 <h1 class="card-title">
                     Sistem Informasi Prediksi Risiko Kredit Keuangan Berbasis<br>Web Machine Learning
                 </h1>
             </div>
 
-            <!-- Body / Form -->
             <div class="card-body">
 
-                {{-- Flash Messages --}}
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -276,9 +260,25 @@
 
                     <div class="form-grid">
 
+                        <!-- 0. Nama Nasabah (full width) -->
+                        <div class="form-group full-width">
+                            <label class="form-label" for="nama_nasabah">Nama Nasabah:</label>
+                            <input
+                                type="text"
+                                id="nama_nasabah"
+                                name="nama_nasabah"
+                                class="form-input"
+                                placeholder="Contoh: Budi Santoso"
+                                value="{{ old('nama_nasabah') }}"
+                                style="max-width: 400px;"
+                            >
+                        </div>
+
+                        <hr class="divider">
+
                         <!-- 1. Umur Orang -->
                         <div class="form-group">
-                            <label class="form-label" for="umur"> Umur Orang:</label>
+                            <label class="form-label" for="umur">Umur Orang:</label>
                             <input
                                 type="number"
                                 id="umur"
@@ -289,28 +289,34 @@
                                 min="17"
                                 max="100"
                                 step="1"
-                                class="form-input"
+                                oninput="
+                                    let maxKerja = this.value - 17;
+                                    let lamaKerja = document.getElementById('lama_kerja');
+                                    lamaKerja.max = maxKerja;
+                                "
                             >
                         </div>
 
-                        <!-- 2. Pendapatan Orang (IDR) -->
+                        <!-- 2. Pendapatan (IDR) -->
                         <div class="form-group">
-                            <label class="form-label" for="pendapatan"> Pendapatan (IDR):</label>
+                            <label class="form-label" for="pendapatan">Pendapatan per Tahun (IDR):</label>
                             <input
                                 type="number"
                                 id="pendapatan"
                                 name="pendapatan"
                                 class="form-input"
-                                placeholder="Contoh: 5.000.000"
+                                placeholder="Contoh: 60000000"
                                 value="{{ old('pendapatan') }}"
-                                min="0"
+                                min="1"
                                 step="1"
+                                oninput="hitungPersen()"
                             >
+                            <span class="form-hint">⚠️ Masukkan pendapatan per tahun</span>
                         </div>
 
                         <!-- 3. Kepemilikan Rumah -->
                         <div class="form-group">
-                            <label class="form-label" for="kepemilikan_rumah"> Kepemilikan Rumah:</label>
+                            <label class="form-label" for="kepemilikan_rumah">Kepemilikan Rumah:</label>
                             <div class="select-wrapper">
                                 <select id="kepemilikan_rumah" name="kepemilikan_rumah" class="form-select">
                                     <option value="" disabled {{ old('kepemilikan_rumah') ? '' : 'selected' }}></option>
@@ -327,7 +333,7 @@
                             </div>
                         </div>
 
-                        <!-- 4. Lama Kerja (tahun) -->
+                        <!-- 4. Lama Kerja -->
                         <div class="form-group">
                             <label class="form-label" for="lama_kerja">Lama Kerja (tahun):</label>
                             <input
@@ -339,32 +345,30 @@
                                 value="{{ old('lama_kerja') }}"
                                 min="0"
                                 step="1"
-                                class="form-input"
                                 oninput="
                                     let umur = document.getElementById('umur').value;
                                     let maxKerja = umur - 17;
-                                    this.max = maxKerja;
                                     this.setCustomValidity(
-                                    this.value > maxKerja 
-                                    ? 'Lama kerja tidak boleh lebih batas maksimal umur' 
-                                    : ''
-                                );
-                              "
+                                        this.value > maxKerja
+                                        ? 'Lama kerja tidak boleh melebihi batas umur'
+                                        : ''
+                                    );
+                                "
                             >
                         </div>
 
-                        <!-- 5. Tujuan Peminjaman -->
+                        <!-- 5. Tujuan Pinjaman -->
                         <div class="form-group">
-                            <label class="form-label" for="tujuan_pinjaman"> Tujuan Pinjaman:</label>
+                            <label class="form-label" for="tujuan_pinjaman">Tujuan Pinjaman:</label>
                             <div class="select-wrapper">
                                 <select id="tujuan_pinjaman" name="tujuan_pinjaman" class="form-select">
                                     <option value="" disabled {{ old('tujuan_pinjaman') ? '' : 'selected' }}></option>
-                                    <option value="education"       {{ old('tujuan_pinjaman') == 'education'       ? 'selected' : '' }}>Pendidikan</option>
-                                    <option value="medical"         {{ old('tujuan_pinjaman') == 'medical'         ? 'selected' : '' }}>Medis / Kesehatan</option>
-                                    <option value="venture"         {{ old('tujuan_pinjaman') == 'venture'         ? 'selected' : '' }}>Usaha / Bisnis</option>
-                                    <option value="personal"        {{ old('tujuan_pinjaman') == 'personal'        ? 'selected' : '' }}>Keperluan Pribadi</option>
-                                    <option value="homeimprovement" {{ old('tujuan_pinjaman') == 'homeimprovement' ? 'selected' : '' }}>Renovasi Rumah</option>
-                                    <option value="debtconsolidation" {{ old('tujuan_pinjaman') == 'debtconsolidation' ? 'selected' : '' }}>Konsolidasi Utang</option>
+                                    <option value="EDUCATION"         {{ old('tujuan_pinjaman') == 'EDUCATION'         ? 'selected' : '' }}>Pendidikan</option>
+                                    <option value="MEDICAL"           {{ old('tujuan_pinjaman') == 'MEDICAL'           ? 'selected' : '' }}>Medis / Kesehatan</option>
+                                    <option value="VENTURE"           {{ old('tujuan_pinjaman') == 'VENTURE'           ? 'selected' : '' }}>Usaha / Bisnis</option>
+                                    <option value="PERSONAL"          {{ old('tujuan_pinjaman') == 'PERSONAL'          ? 'selected' : '' }}>Keperluan Pribadi</option>
+                                    <option value="HOMEIMPROVEMENT"   {{ old('tujuan_pinjaman') == 'HOMEIMPROVEMENT'   ? 'selected' : '' }}>Renovasi Rumah</option>
+                                    <option value="DEBTCONSOLIDATION" {{ old('tujuan_pinjaman') == 'DEBTCONSOLIDATION' ? 'selected' : '' }}>Konsolidasi Utang</option>
                                 </select>
                                 <span class="select-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -376,17 +380,17 @@
 
                         <!-- 6. Grade Pinjaman -->
                         <div class="form-group">
-                            <label class="form-label" for="grade_pinjaman"> Grade Pinjaman:</label>
+                            <label class="form-label" for="grade_pinjaman">Grade Pinjaman:</label>
                             <div class="select-wrapper">
                                 <select id="grade_pinjaman" name="grade_pinjaman" class="form-select">
                                     <option value="" disabled {{ old('grade_pinjaman') ? '' : 'selected' }}></option>
-                                    <option value="A" {{ old('grade_pinjaman') == 'A' ? 'selected' : '' }}>A</option>
-                                    <option value="B" {{ old('grade_pinjaman') == 'B' ? 'selected' : '' }}>B</option>
-                                    <option value="C" {{ old('grade_pinjaman') == 'C' ? 'selected' : '' }}>C</option>
-                                    <option value="D" {{ old('grade_pinjaman') == 'D' ? 'selected' : '' }}>D</option>
-                                    <option value="E" {{ old('grade_pinjaman') == 'E' ? 'selected' : '' }}>E</option>
-                                    <option value="F" {{ old('grade_pinjaman') == 'F' ? 'selected' : '' }}>F</option>
-                                    <option value="G" {{ old('grade_pinjaman') == 'G' ? 'selected' : '' }}>G</option>
+                                    <option value="A" {{ old('grade_pinjaman') == 'A' ? 'selected' : '' }}>A — Terbaik</option>
+                                    <option value="B" {{ old('grade_pinjaman') == 'B' ? 'selected' : '' }}>B — Baik</option>
+                                    <option value="C" {{ old('grade_pinjaman') == 'C' ? 'selected' : '' }}>C — Cukup</option>
+                                    <option value="D" {{ old('grade_pinjaman') == 'D' ? 'selected' : '' }}>D — Mulai Berisiko</option>
+                                    <option value="E" {{ old('grade_pinjaman') == 'E' ? 'selected' : '' }}>E — Risiko Tinggi</option>
+                                    <option value="F" {{ old('grade_pinjaman') == 'F' ? 'selected' : '' }}>F — Sangat Berisiko</option>
+                                    <option value="G" {{ old('grade_pinjaman') == 'G' ? 'selected' : '' }}>G — Terburuk</option>
                                 </select>
                                 <span class="select-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -396,7 +400,7 @@
                             </div>
                         </div>
 
-                        <!-- 7. Jumlah Pinjaman (IDR) -->
+                        <!-- 7. Jumlah Pinjaman -->
                         <div class="form-group">
                             <label class="form-label" for="jumlah_pinjaman">Jumlah Pinjaman (IDR):</label>
                             <input
@@ -404,14 +408,15 @@
                                 id="jumlah_pinjaman"
                                 name="jumlah_pinjaman"
                                 class="form-input"
-                                placeholder="Contoh: 5.000.000"
+                                placeholder="Contoh: 5000000"
                                 value="{{ old('jumlah_pinjaman') }}"
                                 min="0"
                                 step="1"
+                                oninput="hitungPersen()"
                             >
                         </div>
 
-                        <!-- 8. Suku Bunga Pinjaman (%) -->
+                        <!-- 8. Suku Bunga -->
                         <div class="form-group">
                             <label class="form-label" for="suku_bunga">Suku Bunga (%):</label>
                             <input
@@ -427,50 +432,30 @@
                             >
                         </div>
 
-                        <!-- 9. Status Pinjaman (saat ini) -->
+                        <!-- 9. Persentase Pendapatan (AUTO-HITUNG) -->
                         <div class="form-group">
-                            <label class="form-label" for="status_pinjaman">Status Pinjaman:</label>
-                            <div class="select-wrapper">
-                                <select id="status_pinjaman" name="status_pinjaman" class="form-select">
-                                    <option value="" disabled {{ old('status_pinjaman') ? '' : 'selected' }}></option>
-                                    <option value="Fully Paid"   {{ old('status_pinjaman') == 'Fully Paid'   ? 'selected' : '' }}>Lunas (Fully Paid)</option>
-                                    <option value="Current"      {{ old('status_pinjaman') == 'Current'      ? 'selected' : '' }}>Aktif (Current)</option>
-                                    <option value="Charged Off"  {{ old('status_pinjaman') == 'Charged Off'  ? 'selected' : '' }}>Macet (Charged Off)</option>
-                                    <option value="Late"         {{ old('status_pinjaman') == 'Late'         ? 'selected' : '' }}>Terlambat (Late)</option>
-                                    <option value="In Grace Period" {{ old('status_pinjaman') == 'In Grace Period' ? 'selected' : '' }}>Masa Tenggang</option>
-                                </select>
-                                <span class="select-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="6 9 12 15 18 9"/>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- 10. Persentase Pinjaman dari Pendapatan -->
-                        <div class="form-group">
-                            <label class="form-label" for="persen_pinjaman">Persentase Pendapatan:</label>
+                            <label class="form-label" for="persen_tampil">Persentase Pendapatan:</label>
+                            <input type="hidden" id="persen_pinjaman" name="persen_pinjaman" value="{{ old('persen_pinjaman') }}">
                             <input
                                 type="number"
-                                id="persen_pinjaman"
-                                name="persen_pinjaman"
+                                id="persen_tampil"
                                 class="form-input"
-                                placeholder="Contoh: 0.5"
-                                value="{{ old('persen_pinjaman') }}"
+                                placeholder="Otomatis terhitung"
                                 min="0"
-                                max="1"
-                                step="0.01"
+                                step="0.0001"
+                                readonly
                             >
+                            <span class="form-hint">🔄 Dihitung otomatis dari Jumlah Pinjaman ÷ Pendapatan</span>
                         </div>
 
-                        <!-- 11. Default di Catatan Kredit (riwayat) -->
+                        <!-- 10. Riwayat Default -->
                         <div class="form-group">
-                            <label class="form-label" for="default_kredit"> Riwayat Default:</label>
+                            <label class="form-label" for="default_kredit">Riwayat Default:</label>
                             <div class="select-wrapper">
                                 <select id="default_kredit" name="default_kredit" class="form-select">
                                     <option value="" disabled {{ old('default_kredit') ? '' : 'selected' }}></option>
-                                    <option value="0" {{ old('default_kredit') === '0' ? 'selected' : '' }}>Tidak (0)</option>
-                                    <option value="1" {{ old('default_kredit') === '1' ? 'selected' : '' }}>Ya (1)</option>
+                                    <option value="N" {{ old('default_kredit') === 'N' ? 'selected' : '' }}>Tidak Pernah Default (N)</option>
+                                    <option value="Y" {{ old('default_kredit') === 'Y' ? 'selected' : '' }}>Pernah Default (Y)</option>
                                 </select>
                                 <span class="select-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -480,9 +465,9 @@
                             </div>
                         </div>
 
-                        <!-- 12. Lama Catatan Kredit (tahun) -->
+                        <!-- 11. Lama Riwayat Kredit -->
                         <div class="form-group">
-                            <label class="form-label" for="lama_kredit"> Lama Riwayat Kredit:</label>
+                            <label class="form-label" for="lama_kredit">Lama Riwayat Kredit (tahun):</label>
                             <input
                                 type="number"
                                 id="lama_kredit"
@@ -497,7 +482,6 @@
 
                     </div><!-- /form-grid -->
 
-                    <!-- Button Prediksi -->
                     <div class="btn-row">
                         <button type="submit" class="btn-predict">
                             Prediksi
@@ -508,23 +492,34 @@
                         </button>
                     </div>
 
-                    {{-- Hasil Prediksi (ditampilkan setelah submit) --}}
-                    @if (isset($hasil))
-                        <div class="result-area {{ $hasil === 'Layak' ? 'success' : 'danger' }}" style="display:block;">
-                            @if ($hasil === 'Layak')
-                                ✅ Hasil Prediksi: <strong>LAYAK</strong> — Pemohon dinyatakan layak mendapatkan kredit.
-                            @else
-                                ❌ Hasil Prediksi: <strong>TIDAK LAYAK</strong> — Pemohon dinyatakan tidak layak mendapatkan kredit.
-                            @endif
-                        </div>
-                    @endif
-
                 </form>
-
-            </div><!-- /card-body -->
-
-        </div><!-- /predict-card -->
-
+            </div>
+        </div>
     </main>
+
+    <script>
+        function hitungPersen() {
+            const pendapatan = parseFloat(document.getElementById('pendapatan').value);
+            const pinjaman   = parseFloat(document.getElementById('jumlah_pinjaman').value);
+
+            if (pendapatan > 0 && pinjaman > 0) {
+                const persen = (pinjaman / pendapatan).toFixed(4);
+                document.getElementById('persen_pinjaman').value = persen;
+                document.getElementById('persen_tampil').value   = persen;
+            } else {
+                document.getElementById('persen_pinjaman').value = '';
+                document.getElementById('persen_tampil').value   = '';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const oldPersen = document.getElementById('persen_pinjaman').value;
+            if (oldPersen) {
+                document.getElementById('persen_tampil').value = oldPersen;
+            } else {
+                hitungPersen();
+            }
+        });
+    </script>
 
 @endsection
