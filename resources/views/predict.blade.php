@@ -255,8 +255,13 @@
                     </div>
                 @endif
 
-                <form action="{{ route('prediksi.store') }}" method="POST">
+                <form action="{{ route('prediksi.store') }}" method="POST" id="formPrediksi">
                     @csrf
+
+                    {{-- Hidden fields untuk nilai numerik bersih (tanpa titik) --}}
+                    <input type="hidden" id="jumlah_pinjaman" name="jumlah_pinjaman">
+                    <input type="hidden" id="pendapatan_raw" name="pendapatan">
+                    <input type="hidden" id="persen_pinjaman" name="persen_pinjaman" value="{{ old('persen_pinjaman') }}">
 
                     <div class="form-grid">
 
@@ -297,19 +302,18 @@
                             >
                         </div>
 
-                        <!-- 2. Pendapatan (IDR) -->
+                        <!-- 2. Pendapatan (IDR) — tampilan dengan titik -->
                         <div class="form-group">
-                            <label class="form-label" for="pendapatan">💰 Pendapatan per Tahun (IDR):</label>
+                            <label class="form-label" for="pendapatan_tampil">💰 Pendapatan per Tahun (IDR):</label>
                             <input
                                 type="text"
-                                id="pendapatan"
-                                name="pendapatan"
+                                id="pendapatan_tampil"
                                 class="form-input"
                                 placeholder="Contoh: 60.000.000"
-                                value="{{ old('pendapatan') }}"
-                                oninput="formatRupiah(this); hitungPersen()"
+                                value="{{ old('pendapatan') ? number_format(old('pendapatan'), 0, ',', '.') : '' }}"
+                                oninput="formatRupiah(this, 'pendapatan_raw'); hitungPersen()"
+                                inputmode="numeric"
                             >
-
                             <span class="form-hint">
                                 ⚠️ Masukkan pendapatan per tahun
                             </span>
@@ -320,8 +324,7 @@
                             <label class="form-label" for="kepemilikan_rumah">🏠 Kepemilikan Rumah:</label>
                             <div class="select-wrapper">
                                 <select id="kepemilikan_rumah" name="kepemilikan_rumah" class="form-select">
-                                    <option value="" disabled selected('kepemilikan_rumah') ? '' : 'selected' }}>Pilih status rumah</option>
-                                    <option value="" disabled {{ old('kepemilikan_rumah') ? '' : 'selected' }}></option>
+                                    <option value="" disabled {{ old('kepemilikan_rumah') ? '' : 'selected' }}>Pilih status rumah</option>
                                     <option value="RENT"     {{ old('kepemilikan_rumah') == 'RENT'     ? 'selected' : '' }}>Sewa (RENT)</option>
                                     <option value="OWN"      {{ old('kepemilikan_rumah') == 'OWN'      ? 'selected' : '' }}>Milik Sendiri (OWN)</option>
                                     <option value="MORTGAGE" {{ old('kepemilikan_rumah') == 'MORTGAGE' ? 'selected' : '' }}>KPR (MORTGAGE)</option>
@@ -364,7 +367,7 @@
                             <label class="form-label" for="tujuan_pinjaman">🎯 Tujuan Pinjaman:</label>
                             <div class="select-wrapper">
                                 <select id="tujuan_pinjaman" name="tujuan_pinjaman" class="form-select">
-                                    <option value="" disabled {{ old('tujuan_pinjaman') ? '' : 'selected' }}></option>
+                                    <option value="" disabled {{ old('tujuan_pinjaman') ? '' : 'selected' }}>Pilih tujuan</option>
                                     <option value="EDUCATION"         {{ old('tujuan_pinjaman') == 'EDUCATION'         ? 'selected' : '' }}>Pendidikan</option>
                                     <option value="MEDICAL"           {{ old('tujuan_pinjaman') == 'MEDICAL'           ? 'selected' : '' }}>Medis / Kesehatan</option>
                                     <option value="VENTURE"           {{ old('tujuan_pinjaman') == 'VENTURE'           ? 'selected' : '' }}>Usaha / Bisnis</option>
@@ -385,7 +388,7 @@
                             <label class="form-label" for="grade_pinjaman">⭐ Grade Pinjaman:</label>
                             <div class="select-wrapper">
                                 <select id="grade_pinjaman" name="grade_pinjaman" class="form-select">
-                                    <option value="" disabled {{ old('grade_pinjaman') ? '' : 'selected' }}></option>
+                                    <option value="" disabled {{ old('grade_pinjaman') ? '' : 'selected' }}>Pilih grade</option>
                                     <option value="A" {{ old('grade_pinjaman') == 'A' ? 'selected' : '' }}>A — Terbaik</option>
                                     <option value="B" {{ old('grade_pinjaman') == 'B' ? 'selected' : '' }}>B — Baik</option>
                                     <option value="C" {{ old('grade_pinjaman') == 'C' ? 'selected' : '' }}>C — Cukup</option>
@@ -402,17 +405,17 @@
                             </div>
                         </div>
 
-                        <!-- 7. Jumlah Pinjaman -->
+                        <!-- 7. Jumlah Pinjaman — tampilan dengan titik -->
                         <div class="form-group">
-                            <label class="form-label" for="jumlah_pinjaman">💵 Jumlah Pinjaman (IDR):</label>
+                            <label class="form-label" for="pinjaman_tampil">💵 Jumlah Pinjaman (IDR):</label>
                             <input
                                 type="text"
-                                id="pinjaman"
-                                name="pinjaman"
+                                id="pinjaman_tampil"
                                 class="form-input"
                                 placeholder="Contoh: 5.000.000"
-                                value="{{ old('jumlah_pinjaman') }}"
-                                oninput="formatRupiah(this); hitungPersen()"
+                                value="{{ old('jumlah_pinjaman') ? number_format(old('jumlah_pinjaman'), 0, ',', '.') : '' }}"
+                                oninput="formatRupiah(this, 'jumlah_pinjaman'); hitungPersen()"
+                                inputmode="numeric"
                             >
                         </div>
 
@@ -435,14 +438,11 @@
                         <!-- 9. Persentase Pendapatan (AUTO-HITUNG) -->
                         <div class="form-group">
                             <label class="form-label" for="persen_tampil">📈 Persentase Pendapatan:</label>
-                            <input type="hidden" id="persen_pinjaman" name="persen_pinjaman" value="{{ old('persen_pinjaman') }}">
                             <input
-                                type="number"
+                                type="text"
                                 id="persen_tampil"
                                 class="form-input"
                                 placeholder="Otomatis terhitung"
-                                min="0"
-                                step="0.0001"
                                 readonly
                             >
                             <span class="form-hint">🔄 Dihitung otomatis dari Jumlah Pinjaman ÷ Pendapatan</span>
@@ -453,9 +453,9 @@
                             <label class="form-label" for="default_kredit">⚠️ Riwayat Gagal Bayar:</label>
                             <div class="select-wrapper">
                                 <select id="default_kredit" name="default_kredit" class="form-select">
-                                    <option value="" disabled {{ old('default_kredit') ? '' : 'selected' }}></option>
-                                    <option value="N" {{ old('default_kredit') === 'N' ? 'selected' : '' }}>Tidak Pernah  (N)</option>
-                                    <option value="Y" {{ old('default_kredit') === 'Y' ? 'selected' : '' }}>Pernah  (Y)</option>
+                                    <option value="" disabled {{ old('default_kredit') ? '' : 'selected' }}>Pilih riwayat</option>
+                                    <option value="N" {{ old('default_kredit') === 'N' ? 'selected' : '' }}>Tidak Pernah (N)</option>
+                                    <option value="Y" {{ old('default_kredit') === 'Y' ? 'selected' : '' }}>Pernah (Y)</option>
                                 </select>
                                 <span class="select-icon">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -498,53 +498,71 @@
     </main>
 
     <script>
+        /**
+         * Format angka dengan titik sebagai pemisah ribuan (tampilan).
+         * Setiap kali diketik, nilai bersih (tanpa titik) disimpan ke hidden input.
+         *
+         * @param {HTMLInputElement} input   - field tampilan yang diketik user
+         * @param {string}          hiddenId - id hidden input yang menyimpan nilai bersih
+         */
+        function formatRupiah(input, hiddenId) {
+            // Ambil hanya digit
+            let angka = input.value.replace(/\D/g, '');
+
+            // Format dengan titik ribuan
+            let formatted = angka.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+            // Tampilkan yang sudah diformat
+            input.value = formatted;
+
+            // Simpan nilai bersih ke hidden input
+            if (hiddenId) {
+                document.getElementById(hiddenId).value = angka;
+            }
+        }
+
+        /**
+         * Hitung persentase pinjaman dari pendapatan secara otomatis.
+         * Membaca dari hidden input (nilai bersih tanpa titik).
+         */
         function hitungPersen() {
-            const pendapatan = parseFloat(document.getElementById('pendapatan').value);
-            const pinjaman   = parseFloat(document.getElementById('jumlah_pinjaman').value);
+            const pendapatanRaw = document.getElementById('pendapatan_raw').value;
+            const pinjamanRaw   = document.getElementById('jumlah_pinjaman').value;
+
+            const pendapatan = parseFloat(pendapatanRaw);
+            const pinjaman   = parseFloat(pinjamanRaw);
 
             if (pendapatan > 0 && pinjaman > 0) {
                 const persen = (pinjaman / pendapatan).toFixed(4);
                 document.getElementById('persen_pinjaman').value = persen;
-                document.getElementById('persen_tampil').value   = persen;
+                document.getElementById('persen_tampil').value   = (pinjaman / pendapatan * 100).toFixed(2) + '%';
             } else {
                 document.getElementById('persen_pinjaman').value = '';
                 document.getElementById('persen_tampil').value   = '';
             }
         }
 
+        // Saat halaman load (misal setelah validasi gagal & old() terisi)
         document.addEventListener('DOMContentLoaded', function () {
+            // Sinkronkan hidden input dari nilai tampilan yang sudah ada (old value)
+            const pendapatanTampil = document.getElementById('pendapatan_tampil');
+            const pinjamanTampil   = document.getElementById('pinjaman_tampil');
+
+            if (pendapatanTampil.value) {
+                document.getElementById('pendapatan_raw').value = pendapatanTampil.value.replace(/\./g, '');
+            }
+            if (pinjamanTampil.value) {
+                document.getElementById('jumlah_pinjaman').value = pinjamanTampil.value.replace(/\./g, '');
+            }
+
+            // Hitung ulang persentase jika ada old value
             const oldPersen = document.getElementById('persen_pinjaman').value;
             if (oldPersen) {
-                document.getElementById('persen_tampil').value = oldPersen;
+                document.getElementById('persen_tampil').value = (parseFloat(oldPersen) * 100).toFixed(2) + '%';
             } else {
                 hitungPersen();
             }
         });
-
-        
-        function formatRupiah(input) {
-
-            let angka = input.value.replace(/[^,\d]/g, '');
-
-            let split = angka.split(',');
-
-            let sisa = split[0].length % 3;
-
-            let rupiah = split[0].substr(0, sisa);
-
-            let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-
-            let separator = sisa ? '.' : '';
-
-            rupiah += separator + ribuan.join('.');
-        }
-
-        input.value = split[1] != undefined
-            ? rupiah + ',' + split[1]
-            : rupiah;
-        }
     </script>
 
 @endsection

@@ -13,6 +13,8 @@ df = pd.read_csv(os.path.join(base_dir, 'credit_risk_dataset.csv'))
 
 # ── 2. Bersihkan Outlier ──────────────────────────────────
 df = df[df['person_age'] <= 100].copy()
+df = df[df['person_emp_length'] <= 60].copy()  # FIX: cap emp_length (sebelumnya max=123)
+print(f"Jumlah data setelah cleaning outlier: {len(df)}")
 
 # ── 3. Isi Missing Values ─────────────────────────────────
 df['loan_int_rate']     = df['loan_int_rate'].fillna(df['loan_int_rate'].median())
@@ -48,14 +50,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # ── 8. Training Random Forest ─────────────────────────────
+# FIX: hapus class_weight='balanced' karena sudah pakai SMOTE, tidak perlu dobel
 print("\nTraining Random Forest... (tunggu ~1 menit)")
 model = RandomForestClassifier(
-    n_estimators=100,      # jumlah pohon
-    max_depth=10,          # kedalaman tiap pohon
+    n_estimators=100,
+    max_depth=10,
     min_samples_split=10,
-    class_weight='balanced',
     random_state=42,
-    n_jobs=-1              # pakai semua CPU biar lebih cepat
+    n_jobs=-1
 )
 model.fit(X_train, y_train)
 
@@ -75,4 +77,4 @@ ml_dir = os.path.dirname(os.path.abspath(__file__))
 joblib.dump(model,    os.path.join(ml_dir, 'model_kredit.pkl'))
 joblib.dump(encoders, os.path.join(ml_dir, 'label_encoders.pkl'))
 joblib.dump(fitur,    os.path.join(ml_dir, 'fitur_list.pkl'))
-print("\nModel Random Forest berhasil disimpan!")
+print("\nModel berhasil disimpan!")

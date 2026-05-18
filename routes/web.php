@@ -121,3 +121,7 @@ Route::post('/prediksi', [PrediksiController::class, 'store'])
 Route::get('/hasil/{id}', [HasilController::class, 'show'])
     ->middleware('auth')
     ->name('hasil.show');
+
+    Route::get('/hasil/{id}/pdf', [HasilController::class, 'exportPdf'])
+    ->middleware('auth')
+    ->name('hasil.pdf');

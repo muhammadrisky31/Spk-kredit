@@ -385,14 +385,14 @@
             </div>
             <div class="hero-badge-text">
                 <span class="label-small">Sistem Berbasis</span>
-                <span class="label-main">Machine Learning Decision Tree</span>
+                <span class="label-main">Machine Learning RandomForest</span>
             </div>
         </div>
 
         <h2>SPK Prediksi Risiko Kredit</h2>
 
         <p>
-            Sistem Pendukung Keputusan ini menggunakan algoritma <strong>Decision Tree</strong>
+            Sistem Pendukung Keputusan ini menggunakan algoritma <strong>RandomForest</strong>
             yang dilatih dari data kredit nyata untuk memprediksi kemungkinan gagal
             bayar (default) seorang pemohon kredit dengan akurasi tinggi.
         </p>
@@ -439,13 +439,13 @@
         <!-- FAQ Item 2 -->
         <div class="faq-item">
             <button class="faq-question" onclick="toggleFaq(this)">
-                Bagaimana cara kerja Decision Tree?
+                Bagaimana cara kerja RandomForest?
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
             </button>
             <div class="faq-answer">
-                Decision Tree bekerja seperti diagram pohon keputusan. Algoritma ini memecah masalah menjadi serangkaian pertanyaan ya/tidak berdasarkan fitur-fitur data. Setiap cabang mewakili sebuah keputusan, dan setiap daun mewakili hasil akhir (klasifikasi).
+               RandomForest bekerja seperti diagram pohon keputusan. Algoritma ini memecah masalah menjadi serangkaian pertanyaan ya/tidak berdasarkan fitur-fitur data. Setiap cabang mewakili sebuah keputusan, dan setiap daun mewakili hasil akhir (klasifikasi).
             </div>
         </div>
 
