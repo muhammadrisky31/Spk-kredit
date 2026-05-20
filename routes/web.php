@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Prediksi;
 use App\Http\Controllers\PrediksiController;
 use App\Http\Controllers\HasilController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -165,15 +166,20 @@ Route::get('/logout', function () {
 
 });
 
-// ================= USERS =================
-Route::get('/users', function () {
+// ================= USER =================
 
-    if (!Auth::check()) {
-        return redirect('/login');
-    }
+Route::prefix('user')->middleware(['auth'])->group(function () {
 
-    $users = User::all();
+    Route::get('/dashboard', [UserController::class, 'dashboard'])
+        ->name('user.dashboard');
 
-    return view('users', compact('users'));
+});
+
+// ================= ADMIN =================
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
 
 });
