@@ -151,7 +151,11 @@ Route::post('/login', function (Request $request) {
 
     $request->session()->regenerate();
 
-    return redirect('/dashboard');
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    }   
+
+    return redirect()->route('dashboard');
 
 });
 
@@ -181,5 +185,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
+
+    Route::get('/nasabah', [AdminController::class, 'nasabah'])
+        ->name('admin.nasabah');
 
 });

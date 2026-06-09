@@ -188,12 +188,17 @@ table th{
     padding:14px;
     color:#334155;
     font-size:13px;
+    border:1px solid #e2e8f0;
 }
 
 table td{
     padding:14px;
-    border-bottom:1px solid #e2e8f0;
     font-size:13px;
+    border:1px solid #e2e8f0;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
 }
 
 .success{

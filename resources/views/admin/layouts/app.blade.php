@@ -27,16 +27,18 @@
         <ul class="menu">
 
             <li>
-                <a href="{{ route('admin.dashboard') }}" class="active">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="fa-solid fa-table-columns"></i>
-                    Dashboard
+                        Dashboard
                 </a>
             </li>
 
             <li>
-                <a href="#">
+               <a href="{{ route('admin.nasabah') }}"
+                    class="{{ request()->routeIs('admin.nasabah') ? 'active' : '' }}">
                     <i class="fa-solid fa-users"></i>
-                    Nasabah
+                        Nasabah
                 </a>
             </li>
 
