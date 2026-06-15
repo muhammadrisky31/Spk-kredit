@@ -12,10 +12,15 @@ class Prediksi extends Model
         'suku_bunga', 'status_pinjaman', 'rasio_pinjaman',
         'default_kredit', 'lama_riwayat', 'hasil', 'confidence',
         'riwayat_default',
-        // Kolom baru dari FastAPI
+        // Kolom hasil ML
         'limit_rekomendasi',
         'justifikasi',
         'skor_risiko',
+        // Kolom analisis kapasitas
+        'pendapatan_bulanan',
+        'dsr_saat_ini',
+        'sisa_kapasitas_dsr',
+        'limit_kemampuan_bayar',
     ];
 
     protected $casts = [
