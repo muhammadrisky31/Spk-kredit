@@ -124,6 +124,7 @@ Route::post('/register', function (Request $request) {
         'name'     => $request->name,
         'email'    => $request->email,
         'password' => Hash::make($request->password),
+        'role'     => 'pengguna',
     ]);
 
     return redirect('/login');
@@ -153,7 +154,7 @@ Route::post('/login', function (Request $request) {
 
     if ($user->role === 'admin') {
         return redirect()->route('admin.dashboard');
-    }   
+    }
 
     return redirect()->route('dashboard');
 
@@ -170,15 +171,6 @@ Route::get('/logout', function () {
 
 });
 
-// ================= USER =================
-
-Route::prefix('user')->middleware(['auth'])->group(function () {
-
-    Route::get('/dashboard', [UserController::class, 'dashboard'])
-        ->name('user.dashboard');
-
-});
-
 // ================= ADMIN =================
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
@@ -188,5 +180,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('/nasabah', [AdminController::class, 'nasabah'])
         ->name('admin.nasabah');
+
+    Route::delete('/nasabah/{id}', [AdminController::class, 'hapusNasabah'])
+        ->name('admin.hapus-nasabah');
+
+    Route::get('/data-prediksi', [AdminController::class, 'dataPrediksi'])
+        ->name('admin.data-prediksi');
+
+    Route::get('/performa-model', [AdminController::class, 'performaModel'])
+        ->name('admin.performa-model');
 
 });

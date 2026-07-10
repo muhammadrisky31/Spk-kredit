@@ -13,7 +13,9 @@ class HasilController extends Controller
         if (!auth()->check()) return redirect('/login');
 
         $prediksi = Prediksi::where('id', $id)
-                            ->where('user_id', auth()->id())
+                            ->when(auth()->user()->role !== 'admin', function ($q) {
+                                $q->where('user_id', auth()->id());
+                            })
                             ->firstOrFail();
 
         return view('hasil', compact('prediksi'));
@@ -24,7 +26,9 @@ class HasilController extends Controller
         if (!auth()->check()) return redirect('/login');
 
         $prediksi = Prediksi::where('id', $id)
-                            ->where('user_id', auth()->id())
+                            ->when(auth()->user()->role !== 'admin', function ($q) {
+                                $q->where('user_id', auth()->id());
+                            })
                             ->firstOrFail();
 
         $pdf = Pdf::loadView('hasil-pdf', compact('prediksi'));

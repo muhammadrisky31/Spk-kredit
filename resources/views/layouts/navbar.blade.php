@@ -100,10 +100,6 @@
             padding: 18px 24px;
         }
 
-        /* ---- Credit Score SVG ---- */
-        .score-ring-bg { stroke: rgba(255,255,255,0.2); }
-        .score-ring-fill { stroke: #93c5fd; stroke-linecap: round; }
-
         /* ---- Avatar ---- */
         .avatar-blue {
             width: 34px; height: 34px;
@@ -127,7 +123,10 @@
         {{-- Logo --}}
         <div style="display:flex; align-items:center; gap:12px;">
             <div style="width:40px; height:40px; background:#2563eb; border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(37,99,235,0.25);">
-                <i class="fa-solid fa-chart-bar" style="color:#fff; font-size:16px;"></i>
+                <svg style="width:20px; height:20px;" fill="none" stroke="white" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 3v18h18M7 14l3-3 3 2 4-5"/>
+                </svg>
             </div>
             <div>
                 <div style="font-weight:700; color:#111827; font-size:15px; line-height:1.2;">SPK Kredit</div>
@@ -135,34 +134,32 @@
             </div>
         </div>
 
-                {{-- Navigation Links --}}
-       <div style="display:flex; align-items:center; gap:4px; position:absolute; left:50%; transform:translateX(-50%);">
-            <a href="{{ route('dashboard') }}" 
+        {{-- Navigation Links --}}
+        <div style="display:flex; align-items:center; gap:4px; position:absolute; left:50%; transform:translateX(-50%);">
+            <a href="{{ route('dashboard') }}"
             class="nav-link {{ request()->routeIs('dashboard') ? 'nav-active' : '' }}">
                 <i class="fa-solid fa-table-cells-large" style="font-size:13px;"></i>
                 Dashboard
             </a>
-            <a href="{{ route('prediksi') }}" 
+            <a href="{{ route('prediksi') }}"
             class="nav-link {{ request()->routeIs('prediksi*') ? 'nav-active' : '' }}">
                 <i class="fa-solid fa-chart-line" style="font-size:13px;"></i>
                 Prediksi
             </a>
-            <a href="{{ route('riwayat') }}" 
+            <a href="{{ route('riwayat') }}"
             class="nav-link {{ request()->routeIs('riwayat*') ? 'nav-active' : '' }}">
                 <i class="fa-regular fa-clock" style="font-size:13px;"></i>
                 Riwayat
             </a>
-            <a href="{{ route('tentang') }}" 
+            <a href="{{ route('tentang') }}"
             class="nav-link {{ request()->routeIs('tentang*') ? 'nav-active' : '' }}">
                 <i class="fa-solid fa-circle-info" style="font-size:13px;"></i>
                 Tentang
             </a>
         </div>
 
-       
-        </div>
     </div>
 </nav>
 <main class="p-6">
-            @yield('content')
-        </main>
+    @yield('content')
+</main>

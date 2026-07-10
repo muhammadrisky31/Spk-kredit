@@ -22,7 +22,6 @@
             overflow: hidden;
         }
 
-        /* Decorative blobs */
         .blob {
             position: absolute;
             border-radius: 50%;
@@ -59,14 +58,13 @@
             border-radius: 50%;
         }
 
-        /* Back link */
-        /* Back link */
         .back-link-wrapper {
             position: fixed;
             top: 32px;
             left: 40px;
             z-index: 10;
         }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -78,16 +76,13 @@
             transition: color 0.2s;
         }
 
-        .back-link:hover {
-            color: #3b5bdb;
-        }
+        .back-link:hover { color: #3b5bdb; }
 
         .back-link svg {
             width: 16px;
             height: 16px;
         }
 
-        /* Card */
         .card-wrapper {
             position: relative;
             z-index: 5;
@@ -104,7 +99,6 @@
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.09);
         }
 
-        /* Heading */
         .card-title {
             font-size: 24px;
             font-weight: 700;
@@ -120,10 +114,7 @@
             margin-bottom: 28px;
         }
 
-        /* Form */
-        .form-group {
-            margin-bottom: 16px;
-        }
+        .form-group { margin-bottom: 16px; }
 
         .form-label {
             display: block;
@@ -164,9 +155,7 @@
             transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .form-input::placeholder {
-            color: #bbb;
-        }
+        .form-input::placeholder { color: #bbb; }
 
         .form-input:focus {
             border-color: #3b5bdb;
@@ -174,7 +163,6 @@
             box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.1);
         }
 
-        /* Password toggle */
         .toggle-password {
             position: absolute;
             right: 13px;
@@ -184,27 +172,28 @@
             color: #aaa;
             display: flex;
             align-items: center;
+            justify-content: center;
             padding: 0;
+            width: 20px;
+            height: 20px;
             transition: color 0.2s;
         }
 
-        .toggle-password:hover {
-            color: #555;
-        }
+        .toggle-password:hover { color: #555; }
 
         .toggle-password svg {
-            width: 17px;
-            height: 17px;
+            width: 18px;
+            height: 18px;
+            display: block;
+            flex-shrink: 0;
         }
 
-        /* Error messages */
         .error-message {
             font-size: 12px;
             color: #e53e3e;
             margin-top: 4px;
         }
 
-        /* Submit button */
         .btn-submit {
             width: 100%;
             padding: 13px;
@@ -220,15 +209,9 @@
             letter-spacing: 0.3px;
         }
 
-        .btn-submit:hover {
-            background: #3451c7;
-        }
+        .btn-submit:hover { background: #3451c7; }
+        .btn-submit:active { transform: scale(0.99); }
 
-        .btn-submit:active {
-            transform: scale(0.99);
-        }
-
-        /* Register link */
         .register-text {
             text-align: center;
             font-size: 13px;
@@ -242,11 +225,8 @@
             text-decoration: none;
         }
 
-        .register-text a:hover {
-            text-decoration: underline;
-        }
+        .register-text a:hover { text-decoration: underline; }
 
-        /* Alert errors (Laravel) */
         .alert-error {
             background: #fff5f5;
             border: 1px solid #fed7d7;
@@ -260,12 +240,10 @@
 </head>
 <body>
 
-    <!-- Decorative Blobs -->
     <div class="blob blob-top-right"></div>
     <div class="blob blob-bottom-left"></div>
     <div class="blob blob-bottom-left-small"></div>
 
-    <!-- Back to Home Link -->
     <div class="back-link-wrapper">
         <a href="{{ url('/') }}" class="back-link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -275,14 +253,12 @@
         </a>
     </div>
 
-    <!-- Login Card -->
     <div class="card-wrapper">
         <div class="card">
 
             <h1 class="card-title">Selamat Datang!</h1>
-            <p class="card-subtitle">Masuk ke akun SPE Kredit Anda</p>
+            <p class="card-subtitle">Masuk ke akun SPK Kredit Anda</p>
 
-            {{-- Session error messages --}}
             @if ($errors->any())
                 <div class="alert-error">
                     @foreach ($errors->all() as $error)
@@ -300,7 +276,6 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="form-label">Alamat Email</label>
                     <div class="input-wrapper">
@@ -325,7 +300,6 @@
                     @enderror
                 </div>
 
-                <!-- Password -->
                 <div class="form-group">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-wrapper">
@@ -341,17 +315,17 @@
                             class="form-input"
                             placeholder="Minimal 8 karakter"
                             autocomplete="current-password"
+                            minlength="8"
                             required
                         >
                         <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Tampilkan/Sembunyikan password">
-                            <!-- Eye icon (show) -->
-                            <svg id="eye-show" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <svg id="eye-show" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
                             </svg>
-                            <!-- Eye-slash icon (hide) -->
-                            <svg id="eye-hide" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" style="display:none;">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                            <svg id="eye-hide" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                                <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
                             </svg>
                         </button>
                     </div>
@@ -360,7 +334,6 @@
                     @enderror
                 </div>
 
-                <!-- Submit -->
                 <button type="submit" class="btn-submit">Masuk</button>
             </form>
 
