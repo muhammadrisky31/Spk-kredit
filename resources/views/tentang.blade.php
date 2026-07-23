@@ -399,7 +399,7 @@
 
         <div class="hero-stats">
             <div class="stat-box">
-                <div class="stat-value">93.2%</div>
+                <div class="stat-value">87%</div>
                 <div class="stat-label">Akurasi</div>
             </div>
             <div class="stat-box">
@@ -458,7 +458,7 @@
                 </svg>
             </button>
             <div class="faq-answer">
-                Model telah divalidasi dengan akurasi 93.2% menggunakan teknik cross-validation pada dataset 32.000+ data kredit. Namun, akurasi dapat bervariasi tergantung pada kualitas dan kelengkapan data yang dimasukkan.
+                Model telah divalidasi dengan akurasi 87% menggunakan teknik cross-validation pada dataset 32.000+ data kredit. Namun, akurasi dapat bervariasi tergantung pada kualitas dan kelengkapan data yang dimasukkan.
             </div>
         </div>
 
@@ -503,7 +503,7 @@
             <div class="dev-avatar">D</div>
             <div class="dev-info">
                 <h3>Muhammad Risky &amp; Nadyawati</h3>
-                <p>Sistem ini dikembangkan sebagai proyek tugas akhir, dengan fokus pada penerapan Machine Learning Decision Tree dalam bidang analisis risiko kredit.</p>
+                <p>Sistem ini dikembangkan sebagai proyek tugas akhir, dengan fokus pada penerapan Machine Learning Random Forest dalam bidang analisis risiko kredit.</p>
                 <div class="dev-tags">
                     <span class="dev-tag">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>

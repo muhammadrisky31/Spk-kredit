@@ -380,6 +380,9 @@
                                 Max cicilan/bulan = <span class="hl-blue">Rp{{ number_format($maxCicilan, 0, ',', '.') }}</span><br>
                                 Tenor: <strong>36 bulan</strong> | Bunga: <strong>{{ $prediksi->suku_bunga }}%/tahun</strong> ({{ number_format($bungaBulanan * 100, 4) }}%/bulan)<br>
                                 <em style="color:#9ca3af; font-size:12px;">L = M × (1 − (1 + r)⁻ⁿ) / r</em><br>
+                                <span style="color:#9ca3af; font-size:11px; display:block; margin:2px 0 4px; line-height:1.6;">
+                                    L = Limit kemampuan bayar &nbsp;|&nbsp; M = Cicilan maksimal/bulan &nbsp;|&nbsp; r = Suku bunga/bulan &nbsp;|&nbsp; n = Tenor (bulan)
+                                </span>
                                 Limit kemampuan bayar = <span class="hl-blue">Rp{{ number_format($prediksi->limit_kemampuan_bayar, 0, ',', '.') }}</span>
                             </div>
                         </div>

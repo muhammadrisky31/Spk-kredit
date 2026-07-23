@@ -260,10 +260,14 @@
                     <div class="role">Administrator</div>
                 </div>
             </div>
-            <a href="/logout" class="btn-logout">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Logout
-            </a>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+            </form>
         </div>
     </aside>
 

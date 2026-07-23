@@ -65,7 +65,7 @@ def predict():
     label      = 'Berisiko' if pred == 1 else 'Aman'
     risk_score = round(float(proba[1]) * 100, 2)
 
-    # ── Capacity Analysis ─────────────────────────────────
+    # ── Capacity Analysis ─────────────────────────────── ──
     pendapatan_bulanan = float(data['person_income']) / 12
     dsr_saat_ini       = float(data['loan_percent_income'])
     sisa_kapasitas_dsr = max(0.0, 0.35 - dsr_saat_ini)

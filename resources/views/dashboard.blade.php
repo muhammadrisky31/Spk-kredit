@@ -165,7 +165,7 @@
                 Sistem Aktif &amp; Berjalan Normal
             </div>
             <div style="font-size:12.5px; color:#3b82f6; line-height:1.5;">
-                Model Randomforest terlatih dari 32.000+ data kredit. Akurasi validasi: 93.2%. Gunakan sistem ini sebagai pendukung keputusan, bukan satu-satunya acuan.
+                Model Randomforest terlatih dari 32.000+ data kredit. Akurasi validasi: 87%. Gunakan sistem ini sebagai pendukung keputusan, bukan satu-satunya acuan.
             </div>
         </div>
     </div>

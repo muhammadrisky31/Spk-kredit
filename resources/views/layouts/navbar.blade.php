@@ -12,7 +12,6 @@
         * { font-family: 'Inter', 'Segoe UI', sans-serif; }
         body { background-color: #f3f4f8; }
 
-        /* ---- Navbar ---- */
         .nav-active {
             background-color: #2563eb;
             color: #ffffff !important;
@@ -32,12 +31,10 @@
         }
         .nav-link:hover { background-color: #f3f4f6; color: #374151; }
 
-        /* ---- Hero ---- */
         .hero-banner {
             background: linear-gradient(130deg, #1230b8 0%, #1a3fd4 35%, #2554e8 65%, #3b6af8 100%);
         }
 
-        /* ---- Cards ---- */
         .stat-card {
             background: #ffffff;
             border-radius: 16px;
@@ -53,13 +50,12 @@
             display: flex; align-items: center; justify-content: center;
             margin-bottom: 18px;
         }
-        .icon-blue  { background: #eff2ff; color: #3b5bdb; }
-        .icon-green { background: #ecfdf5; color: #059669; }
-        .icon-red   { background: #fff1f2; color: #e11d48; }
-        .icon-teal  { background: #f0fdfa; color: #0d9488; }
-        .icon-purple{ background: #f5f3ff; color: #7c3aed; }
+        .icon-blue   { background: #eff2ff; color: #3b5bdb; }
+        .icon-green  { background: #ecfdf5; color: #059669; }
+        .icon-red    { background: #fff1f2; color: #e11d48; }
+        .icon-teal   { background: #f0fdfa; color: #0d9488; }
+        .icon-purple { background: #f5f3ff; color: #7c3aed; }
 
-        /* ---- Action Items ---- */
         .action-item {
             display: flex; align-items: center; gap: 16px;
             background: #ffffff;
@@ -73,7 +69,6 @@
         .action-item:last-child { margin-bottom: 0; }
         .action-item:hover { background: #f8f9ff; box-shadow: 0 4px 12px rgba(59,91,219,0.06); }
 
-        /* ---- Prediksi Terbaru ---- */
         .prediction-card {
             background: #ffffff;
             border: 1px solid #f1f2f6;
@@ -87,11 +82,9 @@
         }
         .prediction-row:last-child { border-bottom: none; }
 
-        /* ---- Badges ---- */
         .badge-rendah { background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
         .badge-tinggi { background: #fee2e2; color: #dc2626; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
 
-        /* ---- Info Bar ---- */
         .info-bar {
             background: linear-gradient(90deg, #eff6ff 0%, #e0eaff 100%);
             border: 1px solid #bfdbfe;
@@ -100,7 +93,6 @@
             padding: 18px 24px;
         }
 
-        /* ---- Avatar ---- */
         .avatar-blue {
             width: 34px; height: 34px;
             background: #2563eb;
@@ -109,7 +101,63 @@
             color: #fff; font-weight: 700; font-size: 13px;
         }
 
-        /* ---- Scrollbar ---- */
+        /* Dropdown user */
+        .user-dropdown {
+            position: relative;
+        }
+
+        .user-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 7px 12px;
+            cursor: pointer;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #374151;
+            transition: background 0.15s;
+        }
+        .user-btn:hover { background: #f3f4f6; }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            min-width: 180px;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.show { display: block; }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 16px;
+            font-size: 13.5px;
+            color: #374151;
+            text-decoration: none;
+            transition: background 0.15s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        .dropdown-item:hover { background: #f9fafb; }
+        .dropdown-item.logout { color: #dc2626; }
+        .dropdown-item.logout:hover { background: #fff1f2; }
+        .dropdown-divider { border-top: 1px solid #f3f4f6; margin: 4px 0; }
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 4px; }
     </style>
@@ -130,7 +178,6 @@
             </div>
             <div>
                 <div style="font-weight:700; color:#111827; font-size:15px; line-height:1.2;">SPK Kredit</div>
-                <div style="font-size:11px; color:#9ca3af; line-height:1.2;"></div>
             </div>
         </div>
 
@@ -158,8 +205,52 @@
             </a>
         </div>
 
+        {{-- User Dropdown --}}
+        <div class="user-dropdown">
+            <button class="user-btn" onclick="toggleDropdown()">
+                <div class="avatar-blue">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                </div>
+                {{ Auth::user()->name }}
+                <i class="fa-solid fa-chevron-down" style="font-size:11px; color:#9ca3af;"></i>
+            </button>
+
+            <div class="dropdown-menu" id="userDropdown">
+                <div style="padding:12px 16px; border-bottom:1px solid #f3f4f6;">
+                    <div style="font-size:13px; font-weight:700; color:#111827;">{{ Auth::user()->name }}</div>
+                    <div style="font-size:12px; color:#9ca3af;">{{ Auth::user()->email }}</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="dropdown-item logout">
+                        <i class="fa-solid fa-right-from-bracket" style="font-size:13px;"></i>
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+
     </div>
 </nav>
+
 <main class="p-6">
     @yield('content')
 </main>
+
+<script>
+    function toggleDropdown() {
+        document.getElementById('userDropdown').classList.toggle('show');
+    }
+
+    // Tutup dropdown kalau klik di luar
+    document.addEventListener('click', function(e) {
+        const dropdown = document.querySelector('.user-dropdown');
+        if (!dropdown.contains(e.target)) {
+            document.getElementById('userDropdown').classList.remove('show');
+        }
+    });
+</script>
+
+</body>
+</html>

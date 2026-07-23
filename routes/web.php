@@ -161,15 +161,16 @@ Route::post('/login', function (Request $request) {
 });
 
 // ================= LOGOUT =================
-Route::get('/logout', function () {
+Route::post('/logout', function (Request $request) {
 
     Auth::logout();
 
-    session()->flush();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
     return redirect('/login');
 
-});
+})->name('logout');
 
 // ================= ADMIN =================
 
